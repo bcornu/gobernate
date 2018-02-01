@@ -1,0 +1,27 @@
+gobernate allows db CRUD-like access on structs
+you can create a DAO with:
+  objDAO := dao.GetDAO(model.MyObject{})
+then you can use it as is, current functions implemented:
+  GetOne(id) => obj
+  GetAll() => []obj
+  Insert(obj) => obj
+  Update(obj) => obj
+  Delete(id)
+
+see sample/main.go for examples
+
+rules:
+  the field "Id int64" has to be present in every structs
+
+  the id is not taken into account during an insert
+
+  the id has to be present and > 0 during an update
+
+  while inserting/updating a struct, if one field is a struct:
+    if the child Id > 0, it will be updated
+    if the child Id == 0, it will be created
+
+bugs:
+  struct loops will results in an infinite loop -- detectable
+
+  struct child can not yet be arrays/slices -- in progress with mapping tables

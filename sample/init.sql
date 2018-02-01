@@ -1,0 +1,7 @@
+DROP DATABASE IF EXISTS test;
+
+DROP USER IF EXISTS test;
+
+CREATE USER test WITH PASSWORD 'testpassword';
+
+CREATE DATABASE test OWNER test;
